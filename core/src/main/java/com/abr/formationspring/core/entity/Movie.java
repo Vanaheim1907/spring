@@ -7,8 +7,31 @@ public class Movie {
     private String title;
     private String description;
     private String type;
-    private String mainActor;
-    private List<String> distribution;
+    private Long id;
+
+    public Movie() {
+    }
+
+    public Movie(Long id, String title, String type) {
+        this.title = title;
+        this.type = type;
+        this.id = id;
+    }
+
+    public Movie(Long id, String title, String type, String description) {
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
