@@ -5,6 +5,7 @@ import com.abr.formationspring.core.repository.MovieRepositoryInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultMovieService implements MovieServiceInterface{
@@ -21,17 +22,17 @@ public class DefaultMovieService implements MovieServiceInterface{
 
     public Movie registerMovie(Movie movie){
 
-        movieRepository.add(movie);
+        movieRepository.save(movie);
         return movie;
     }
 
     @Override
-    public List<Movie> list() {
-        return movieRepository.list();
+    public Iterable<Movie> list() {
+        return movieRepository.findAll();
     }
 
     @Override
-    public Movie getMovieById(Long id) {
-        return movieRepository.getById(id);
+    public Optional<Movie> getMovieById(Long id) {
+        return Optional.of(movieRepository.findById(id).orElseThrow());
     }
 }

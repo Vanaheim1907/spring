@@ -1,5 +1,7 @@
 package com.abr.formationspring.core.entity;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.List;
 
 public class Movie {
@@ -7,6 +9,7 @@ public class Movie {
     private String title;
     private String description;
     private String type;
+    @Id
     private Long id;
 
     public Movie() {

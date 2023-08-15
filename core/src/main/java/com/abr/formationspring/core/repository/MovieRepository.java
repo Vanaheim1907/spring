@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.util.List;
 
-@Repository
-public class MovieRepository implements MovieRepositoryInterface{
+//@Repository
+/*public class MovieRepository implements MovieRepositoryInterface{
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -48,3 +48,4 @@ public class MovieRepository implements MovieRepositoryInterface{
 
     }
 }
+*/
