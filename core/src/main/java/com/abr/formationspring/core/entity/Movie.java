@@ -1,15 +1,18 @@
 package com.abr.formationspring.core.entity;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 public class Movie {
 
     private String title;
     private String description;
+    @Column(name = "genre")
     private String type;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Movie() {
