@@ -2,18 +2,31 @@ package com.abr.formationspring.core.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Movie {
 
+    @Column(nullable = false, length = 20)
     private String title;
     private String description;
-    @Column(name = "genre")
+    @Column(name = "genre", nullable = false, length = 20)
     private String type;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JoinColumn(name = "ID_MAIN_ACTOR")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Actor mainActor;
+
+    @ManyToMany
+    @JoinTable(name = "MOVIE_SEC_ACTORS", joinColumns = {@JoinColumn(name = "ID_MOVIE")}, inverseJoinColumns = {@JoinColumn(name = "ID_ACTOR")})
+    private List<Actor> secondaryActors = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "movie")
+    private List<Review> reviewList = new ArrayList<>();
 
     public Movie() {
     }
@@ -61,5 +74,29 @@ public class Movie {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Actor getMainActor() {
+        return mainActor;
+    }
+
+    public void setMainActor(Actor mainActor) {
+        this.mainActor = mainActor;
+    }
+
+    public List<Actor> getSecondaryActors() {
+        return secondaryActors;
+    }
+
+    public void setSecondaryActors(List<Actor> secondaryActors) {
+        this.secondaryActors = secondaryActors;
+    }
+
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 }

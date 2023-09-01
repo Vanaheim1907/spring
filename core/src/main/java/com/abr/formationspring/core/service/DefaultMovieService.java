@@ -5,7 +5,7 @@ import com.abr.formationspring.core.repository.MovieRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -34,7 +34,20 @@ public class DefaultMovieService implements MovieServiceInterface{
     }
 
     @Override
-    public Optional<Movie> getMovieById(Long id) {
-        return Optional.of(movieRepository.findById(id).orElseThrow());
+    public Movie getMovieById(Long id) {
+
+        Optional<Movie> optionalMovie = movieRepository.findById(id);
+        if (optionalMovie.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        Movie movie = optionalMovie.get();
+        //Initialize proxy
+        movie.getMainActor().getFirstName();
+        movie.getReviewList().forEach(review -> {
+            review.getMark();
+            review.setMovie(null);
+        });
+        //
+        return movie;
     }
 }

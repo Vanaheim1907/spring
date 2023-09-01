@@ -9,5 +9,5 @@ public interface MovieServiceInterface {
 
     Movie registerMovie(Movie movie);
     Iterable<Movie> list();
-    Optional<Movie> getMovieById(Long id);
+    Movie getMovieById(Long id);
 }
