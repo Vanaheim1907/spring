@@ -9,9 +9,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
-public class DefaultMovieService implements MovieServiceInterface{
+public class DefaultMovieService implements MovieServiceInterface {
 
-    @Autowired
     private final MovieRepositoryInterface movieRepository;
 
     public DefaultMovieService(MovieRepositoryInterface movieRepository) {
@@ -22,7 +21,7 @@ public class DefaultMovieService implements MovieServiceInterface{
         return movieRepository;
     }
 
-    public Movie registerMovie(Movie movie){
+    public Movie registerMovie(Movie movie) {
 
         movieRepository.save(movie);
         return movie;
@@ -37,17 +36,17 @@ public class DefaultMovieService implements MovieServiceInterface{
     public Movie getMovieById(Long id) {
 
         Optional<Movie> optionalMovie = movieRepository.findById(id);
-        if (optionalMovie.isEmpty()){
+        if (optionalMovie.isEmpty()) {
             throw new NoSuchElementException();
         }
         Movie movie = optionalMovie.get();
-        //Initialize proxy
+        //Initialize proxys
         movie.getMainActor().getFirstName();
-        movie.getReviewList().forEach(review -> {
+        movie.getReviews().forEach(review -> {
             review.getMark();
             review.setMovie(null);
         });
-        //
+
         return movie;
     }
 }

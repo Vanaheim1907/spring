@@ -1,6 +1,9 @@
 package com.abr.formationspring.core.entity;
 
+
 import jakarta.persistence.*;
+
+
 
 @Entity
 public class Actor {
@@ -13,8 +16,12 @@ public class Actor {
     @Column(length = 20)
     private String lastName;
 
-    public Actor() {
+    public Actor(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
+
+    public Actor(){}
 
     public Long getId() {
         return id;

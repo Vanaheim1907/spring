@@ -2,8 +2,7 @@ package com.abr.formationspring.core.repository;
 
 import com.abr.formationspring.core.entity.Movie;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
 public interface MovieRepositoryInterface extends CrudRepository<Movie, Long> {
 

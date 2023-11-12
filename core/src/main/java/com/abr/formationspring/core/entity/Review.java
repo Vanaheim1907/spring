@@ -5,17 +5,18 @@ import jakarta.persistence.*;
 @Entity
 public class Review {
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String reviewComment;
     @Column(nullable = false)
     private Short mark;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "ID_MOVIE")
     private Movie movie;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "ID_REVIEWER")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private User reviwer;
+    private User reviewer;
 
     public Long getId() {
         return id;
@@ -49,11 +50,11 @@ public class Review {
         this.movie = movie;
     }
 
-    public User getReviwer() {
-        return reviwer;
+    public User getReviewer() {
+        return reviewer;
     }
 
-    public void setReviwer(User reviwer) {
-        this.reviwer = reviwer;
+    public void setReviewer(User reviewer) {
+        this.reviewer = reviewer;
     }
 }

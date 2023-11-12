@@ -34,7 +34,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
         FileWriter writer;
         try{
             writer=new FileWriter(file,true);
-            writer.write(movie.getId()+";"+movie.getTitle()+";"+movie.getType()+";"+movie.getDescription()+"\n");
+            writer.write(movie.getId()+";"+movie.getTitle()+";"+movie.getGenre()+";"+movie.getDescription()+"\n");
             writer.close();
         }
         catch (IOException e){
@@ -54,7 +54,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
                 final String[] titreEtType = line.split("\\;");
                 movie.setId(Long.parseLong(titreEtType[0]));
                 movie.setTitle(titreEtType[1]);
-                movie.setType(titreEtType[2]);
+                movie.setGenre(titreEtType[2]);
                 movies.add(movie);
             }
         } catch (FileNotFoundException e) {
@@ -76,7 +76,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
                 final long nextMovieId = Long.parseLong(allProperties[0]);
                 if (nextMovieId == id) {
                     movie.setTitle(allProperties[1]);
-                    movie.setType(allProperties[2]);
+                    movie.setGenre(allProperties[2]);
                     movie.setDescription(allProperties[3]);
                     return Optional.of(movie);
                 }
@@ -90,7 +90,7 @@ public class FileMovieRepository implements MovieRepositoryInterface {
             e.printStackTrace();
         }
         movie.setTitle("UNKNOWN");
-        movie.setType("UNKNOWN");
+        movie.setGenre("UNKNOWN");
         movie.setDescription("UNKNOWN");
         return Optional.of(movie);
     }
